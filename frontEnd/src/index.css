@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-image: url("./public/elements/background.jpg");
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boxContainer {
+  height: 90vh;
+  width: 95vw;
+  backdrop-filter: blur(2px);
+  background-color: rgba(17, 25, 40, 0.75);
+  /* background-color: red; */
+  margin: auto;
+  border-radius: 12px;
+  border: white 2px solid;
+}
+.profile {
+  display: flex;
+  flex-direction: column;
+}
