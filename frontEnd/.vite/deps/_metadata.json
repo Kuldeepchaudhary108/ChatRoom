@@ -1,8 +1,31 @@
 {
-  "hash": "dbfe3a34",
+  "hash": "895b2780",
   "configHash": "6652eff4",
-  "lockfileHash": "e3b0c442",
-  "browserHash": "38e6fcb6",
-  "optimized": {},
-  "chunks": {}
+  "lockfileHash": "e2f9ec83",
+  "browserHash": "1398ba85",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "e01e9b1c",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "f59f7701",
+      "needsInterop": true
+    },
+    "emoji-picker-react": {
+      "src": "../../node_modules/emoji-picker-react/dist/emoji-picker-react.esm.js",
+      "file": "emoji-picker-react.js",
+      "fileHash": "f760eedd",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-UTEJFLXC": {
+      "file": "chunk-UTEJFLXC.js"
+    }
+  }
 }

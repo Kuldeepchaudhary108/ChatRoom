@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
 export default function Profile() {
-  const [selection, setSelection] = useState(null);
+  const [selection, setSelection] = useState("Overview");
   const handleClick = (value) => {
     setSelection(value);
   };
 
   return (
-    <div className=" flex h-96">
-      <div className="profile space-y-3 w-[20%]  ">
+    <div className=" flex h-96 rounded-md ">
+      <div className="profile space-y-3 w-[20%] backdrop-blur ">
         {["Overview", "Media", "Files", "links", "Groups"].map(
           (value, index) => (
             <button
@@ -111,8 +111,18 @@ export default function Profile() {
         )}
 
         {/* Additional Sections */}
-        {selection !== "Overview" && selection !== "Media" && (
-          <div className="flex items-center justify-center h-full text-gray-400">
+        {selection === "Files" && (
+          <div className=" bg-gray-800 w-[400px] rounded-lg p-6 shadow-lg flex items-center justify-center h-full text-gray-400">
+            <p>{selection} content is coming soon...</p>
+          </div>
+        )}
+        {selection === "links" && (
+          <div className=" bg-gray-800 w-[400px] rounded-lg p-6 shadow-lg flex items-center justify-center h-full text-gray-400">
+            <p>{selection} content is coming soon...</p>
+          </div>
+        )}
+        {selection === "Groups" && (
+          <div className=" bg-gray-800 w-[400px] rounded-lg p-6 shadow-lg flex items-center justify-center h-full text-gray-400">
             <p>{selection} content is coming soon...</p>
           </div>
         )}

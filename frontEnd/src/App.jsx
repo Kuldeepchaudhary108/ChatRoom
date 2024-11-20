@@ -1,11 +1,10 @@
 import React from "react";
-import Container from "./components/container";
-
+import { Outlet } from "react-router-dom";
 
 export default function App() {
   return (
     <div>
-      <Container />
+      <Outlet />
     </div>
   );
 }
