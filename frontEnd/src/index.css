@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background-image: url("./public/elements/background.jpg");
+  background-image: url("./elements/background.jpg");
   height: 100vh;
   display: flex;
   align-items: center;

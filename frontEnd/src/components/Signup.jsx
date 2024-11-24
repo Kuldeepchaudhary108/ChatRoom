@@ -1,7 +1,22 @@
-import React from "react";
-import { TextField, Button, Typography, Box } from "@mui/material";
+import React, { useEffect } from "react";
+import { TextField, Button, Typography, Box, styled } from "@mui/material";
+import { useState } from "react";
+import { API } from "../service/api.js";
+
+const initialSignup = {
+  usename: "",
+  fullname: "",
+  email: "",
+  password: "",
+};
 
 const Signup = () => {
+  const [signupDet, setSignupDet] = useState({});
+
+  useEffect(()=>{
+    setSignupDet(initialSignup);
+  },[])
+
   return (
     <div>
       <Box
@@ -45,6 +60,7 @@ const Signup = () => {
             fullWidth
             label="Username"
             variant="outlined"
+            onChange={()=>{}}
             sx={{
               mb: 2,
               "& .MuiInputLabel-root": { color: "#d1d5db" },
@@ -63,8 +79,7 @@ const Signup = () => {
           />
           <TextField
             fullWidth
-            label="Password"
-            type="password"
+            label="Fullname"
             variant="outlined"
             sx={{
               mb: 2,
@@ -84,7 +99,28 @@ const Signup = () => {
           />
           <TextField
             fullWidth
-            label="Confirm Password"
+            label="email"
+            type="email"
+            variant="outlined"
+            sx={{
+              mb: 2,
+              "& .MuiInputLabel-root": { color: "#d1d5db" },
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "#6A11CB",
+                },
+                "&:hover fieldset": {
+                  borderColor: "#2575FC",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "#2575FC",
+                },
+              },
+            }}
+          />
+          <TextField
+            fullWidth
+            label="Password"
             type="password"
             variant="outlined"
             sx={{
