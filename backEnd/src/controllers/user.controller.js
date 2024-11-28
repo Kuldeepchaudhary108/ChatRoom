@@ -105,7 +105,9 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(401, " Password does not match with user ");
   }
 
-  const { accessToken, refreshToken } = await generateAccessToken(user._id);
+  const { accessToken, refreshToken } = await gernateAccessAndRefreshTokens(
+    user._id
+  );
 
   const loggedInUser = await User.findById(user._id).select(
     "-password -refreshToken"
