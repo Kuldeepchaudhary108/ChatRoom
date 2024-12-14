@@ -1,23 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Outlet } from "react-router-dom";
-import { ThemeProvider } from "./context/theme";
+import { ThemeProvider } from "./context/theme.jsx";
 
 export default function App() {
-  const [themeMode, setThemeMode] = useState("light");
-
-  const lightTheme = () => {
-    setThemeMode("light");
-  };
-  const darkTheme = () => {
-    setThemeMode("dark");
-  };
-
-  useEffect(() => {
-    document.querySelector("html").classList.remove("light", "dark");
-    document.querySelector("html").classList.add(themeMode);
-  }, [themeMode]);
   return (
-    <ThemeProvider value={{ themeMode, darkTheme, lightTheme }}>
+    <ThemeProvider>
       <Outlet />
     </ThemeProvider>
   );

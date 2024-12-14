@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import EmojiPicker from "emoji-picker-react";
 import Profile from "./Profile";
+import ThemeToggleButton from "./ThemeBttn";
 export default function Chats() {
   const users = [
     { id: 1, message: "Jack duniya ka papa ", time: "4:15" },
@@ -19,7 +20,7 @@ export default function Chats() {
     setEmoji(false);
   };
 
-  // using chatgpt  
+  // using chatgpt
   return (
     <div className=" text-white   h-full p-2">
       <header className="flex items-center  justify-between mb-4   border-b-[1px]">
@@ -27,7 +28,7 @@ export default function Chats() {
           <div className="w-10 h-10 bg-gray-600 rounded-full">
             <img
               className="rounded-full cursor-pointer"
-              src="elements/jack.png"
+              src="/elements/jack.png"
               alt=""
               onClick={() => setViewProfile((prev) => !prev)}
             />
@@ -40,8 +41,8 @@ export default function Chats() {
           </div>
         </div>
         <div className="flex space-x-5 cursor-pointer">
-          <img className="h-5" src="elements/video.png" alt="" />
-          <img className="h-5" src="elements/phone.png" alt="" />
+          <img className="h-5" src="/elements/video.png" alt="" />
+          <img className="h-5" src="/elements/phone.png" alt="" />
           <img
             onClick={() => setViewProfile((prev) => !prev)}
             className="h-5"
@@ -66,9 +67,9 @@ export default function Chats() {
       </div>
       <footer className="flex items-center gap-5">
         <div className="flex w-fit gap-2 mr-2 space-x-1 cursor-pointer">
-          <img className="w-6" src="elements/img.png" alt="" />
-          <img className="w-6" src="elements/camera.png" alt="" />
-          <img className="w-6" src="elements/mic.png" alt="" />
+          <img className="w-6" src="/elements/img.png" alt="error" />
+          <img className="w-6" src="/elements/camera.png" alt="error" />
+          <img className="w-6" src="/elements/mic.png" alt="error" />
         </div>
         <input
           type="text"
@@ -80,7 +81,7 @@ export default function Chats() {
         <div className="cursor-pointer relative">
           <img
             onClick={() => setEmoji((prev) => !prev)}
-            src="elements/emoji.png"
+            src="/elements/emoji.png"
             alt=""
           />
           <div className="absolute bottom-12 -left-72 ">
@@ -98,6 +99,9 @@ export default function Chats() {
           </div>
         </div>
       )}
+      <div className="absolute top-0 left-0">
+        <ThemeToggleButton />
+      </div>
     </div>
   );
 }

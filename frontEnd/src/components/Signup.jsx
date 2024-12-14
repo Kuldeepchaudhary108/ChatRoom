@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { TextField, Button, Typography, Box, styled } from "@mui/material";
 import { useState } from "react";
-import { API } from "../service/api.js";
+// import { API } from "../service/api.js";
 
 const initialSignup = {
   usename: "",
@@ -13,9 +13,9 @@ const initialSignup = {
 const Signup = () => {
   const [signupDet, setSignupDet] = useState({});
 
-  useEffect(()=>{
+  useEffect(() => {
     setSignupDet(initialSignup);
-  },[])
+  }, []);
 
   return (
     <div>
@@ -60,7 +60,7 @@ const Signup = () => {
             fullWidth
             label="Username"
             variant="outlined"
-            onChange={()=>{}}
+            onChange={() => {}}
             sx={{
               mb: 2,
               "& .MuiInputLabel-root": { color: "#d1d5db" },
