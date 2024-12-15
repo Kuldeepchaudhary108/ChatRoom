@@ -31,7 +31,7 @@ export default function Profile() {
             <div className="flex items-center space-x-4">
               <img
                 className="rounded-full w-20 h-20"
-                src="elements/jack.png"
+                src="/elements/jack.png"
                 alt="Profile Picture"
               />
               <div>
@@ -44,7 +44,7 @@ export default function Profile() {
               <button className="bg-gray-700 p-3 rounded-md flex items-center space-x-2 hover:bg-gray-600">
                 <img
                   className="w-5"
-                  src="elements/video.png"
+                  src="/elements/video.png"
                   alt="Video Call"
                 />
                 <span>Video</span>
@@ -52,7 +52,7 @@ export default function Profile() {
               <button className="bg-gray-700 p-3 rounded-md flex items-center space-x-2 hover:bg-gray-600">
                 <img
                   className="w-5"
-                  src="elements/phone.png"
+                  src="/elements/phone.png"
                   alt="Voice Call"
                 />
                 <span>Voice</span>
@@ -102,7 +102,7 @@ export default function Profile() {
               .map((_, index) => (
                 <img
                   key={index}
-                  src="elements/jack.png"
+                  src="/elements/jack.png"
                   alt={`Media ${index + 1}`}
                   className="rounded-lg shadow-md hover:scale-105 transition"
                 />

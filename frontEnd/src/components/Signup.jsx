@@ -1,21 +1,13 @@
 import React, { useEffect } from "react";
-import { TextField, Button, Typography, Box, styled } from "@mui/material";
+import { TextField, Button, Typography, Box } from "@mui/material";
 import { useState } from "react";
-// import { API } from "../service/api.js";
-
-const initialSignup = {
-  usename: "",
-  fullname: "",
-  email: "",
-  password: "",
-};
+import { Link } from "react-router-dom"; 
 
 const Signup = () => {
-  const [signupDet, setSignupDet] = useState({});
-
-  useEffect(() => {
-    setSignupDet(initialSignup);
-  }, []);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [UserName, setUserName] = useState("");
+  const [FullName, setFullName] = useState("");
 
   return (
     <div>
@@ -58,9 +50,10 @@ const Signup = () => {
         <form style={{ width: "100%" }} noValidate>
           <TextField
             fullWidth
-            label="Username"
+            label="UserName"
+            value={UserName}
+            onChange={(e) => setUserName(e.target.value)}
             variant="outlined"
-            onChange={() => {}}
             sx={{
               mb: 2,
               "& .MuiInputLabel-root": { color: "#d1d5db" },
@@ -80,6 +73,8 @@ const Signup = () => {
           <TextField
             fullWidth
             label="Fullname"
+            value={FullName}
+            onChange={(e) => setFullName(e.target.value)}
             variant="outlined"
             sx={{
               mb: 2,
@@ -99,8 +94,10 @@ const Signup = () => {
           />
           <TextField
             fullWidth
-            label="email"
+            label="Email"
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             variant="outlined"
             sx={{
               mb: 2,
@@ -122,6 +119,8 @@ const Signup = () => {
             fullWidth
             label="Password"
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             variant="outlined"
             sx={{
               mb: 2,
@@ -155,6 +154,24 @@ const Signup = () => {
             Sign Up
           </Button>
         </form>
+
+        {/* Already have an account? Login link */}
+        <Typography
+          variant="body2"
+          sx={{ mt: 2, color: "#d1d5db", fontWeight: 500 }}
+        >
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            style={{
+              color: "#6A11CB",
+              textDecoration: "none",
+              fontWeight: "bold",
+            }}
+          >
+            Login
+          </Link>
+        </Typography>
       </Box>
     </div>
   );

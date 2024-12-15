@@ -5,6 +5,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
   Route,
+  Navigate,
 } from "react-router-dom";
 import Signup from "./components/Signup.jsx";
 import "./index.css";
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
       <Route path="/chat/:user/:id" element={<Container />} />
+      <Route path="*" element={<Navigate to="/login" />} />
     </>
   )
 );

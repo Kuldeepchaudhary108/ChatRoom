@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField, Button, Typography, Box } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <div>
       <Box
@@ -43,8 +46,10 @@ const Login = () => {
         <form style={{ width: "100%" }} noValidate>
           <TextField
             fullWidth
-            label="Username"
+            label="Email"
             variant="outlined"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             sx={{
               mb: 2,
               "& .MuiInputLabel-root": { color: "#d1d5db" },
@@ -65,6 +70,8 @@ const Login = () => {
             fullWidth
             label="Password"
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             variant="outlined"
             sx={{
               mb: 2,
@@ -99,6 +106,22 @@ const Login = () => {
             Login
           </Button>
         </form>
+        <Typography
+          variant="body2"
+          sx={{ mt: 2, color: "#d1d5db", fontWeight: 500 }}
+        >
+          Don't have an account?{" "}
+          <Link
+            to="/signup"
+            style={{
+              color: "#6A11CB",
+              textDecoration: "none",
+              fontWeight: "bold",
+            }}
+          >
+            SignUp
+          </Link>
+        </Typography>
       </Box>
     </div>
   );
