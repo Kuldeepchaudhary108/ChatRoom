@@ -3,9 +3,12 @@ import { TextField, Button, Typography, Box } from "@mui/material";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiCLient, SIGNUP_ROUTE } from "../service/api";
+import { useAppStore } from "../store/store.js";
+// import { userInfo } from "os";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const { setUserInfo, userInfo } = useAppStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [UserName, setUserName] = useState("");
@@ -18,12 +21,12 @@ const Signup = () => {
       UserName,
       FullName,
     });
-    console.log(response);
-    console.log(response.data);
 
     if (response.status === 201) {
-      console.log(response.status);
-      navigate("/login");
+      const user = response.data.user;
+      setUserInfo(user);
+
+      navigate(`/chat/${user.username}/${user._id}`);
     }
   };
   return (

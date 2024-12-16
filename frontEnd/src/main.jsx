@@ -7,12 +7,8 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Signup from "./components/Signup.jsx";
 import "./index.css";
-import App from "./App.jsx";
-import Login from "./components/Login.jsx";
-import Container from "./components/Container.jsx";
-
+import { Signup, Login, Container } from "./components/index.js";
 // const router = createBrowserRouter([
 //   {
 //     path: "/",
@@ -34,12 +30,26 @@ import Container from "./components/Container.jsx";
 //   },
 // ]);
 
+const PrivateRoute = ({ children }) => {
+  const accessToken = sessionStorage.getItem("accessToken");
+
+  return accessToken ? children : <Navigate to="/login" />;
+};
+
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/chat/:user/:id" element={<Container />} />
+      <Route
+        path="/chat/:user/:id"
+        element={
+          <PrivateRoute>
+            <Container />
+          </PrivateRoute>
+        }
+      />
       <Route path="*" element={<Navigate to="/login" />} />
     </>
   )
