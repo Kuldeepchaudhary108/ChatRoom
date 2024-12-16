@@ -27,7 +27,15 @@ const UserSchema = new Schema(
     },
     avatar: {
       type: String,
-      required: true,
+      required: false,
+    },
+    color: {
+      type: Number,
+      required: false,
+    },
+    profileSetup: {
+      type: Boolean,
+      default: false,
     },
     password: {
       type: String,
@@ -35,9 +43,11 @@ const UserSchema = new Schema(
     },
     refreshToken: {
       type: String,
+      required: false,
     },
     about: {
       type: String,
+      required: false,
     },
   },
 

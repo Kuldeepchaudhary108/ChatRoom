@@ -63,6 +63,9 @@ const Login = () => {
                 "&.Mui-focused fieldset": {
                   borderColor: "#2575FC",
                 },
+                "& .MuiOutlinedInput-input": {
+                  color: "#d1d5db", // Input text color
+                },
               },
             }}
           />
@@ -85,6 +88,9 @@ const Login = () => {
                 },
                 "&.Mui-focused fieldset": {
                   borderColor: "#2575FC",
+                },
+                "& .MuiOutlinedInput-input": {
+                  color: "#d1d5db", // Input text color
                 },
               },
             }}

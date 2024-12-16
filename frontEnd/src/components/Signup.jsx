@@ -1,14 +1,31 @@
 import React, { useEffect } from "react";
 import { TextField, Button, Typography, Box } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom"; 
+import { Link, useNavigate } from "react-router-dom";
+import { apiCLient, SIGNUP_ROUTE } from "../service/api";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [UserName, setUserName] = useState("");
   const [FullName, setFullName] = useState("");
 
+  const HandleSignUp = async () => {
+    const response = await apiCLient.post(SIGNUP_ROUTE, {
+      email,
+      password,
+      UserName,
+      FullName,
+    });
+    console.log(response);
+    console.log(response.data);
+
+    if (response.status === 201) {
+      console.log(response.status);
+      navigate("/login");
+    }
+  };
   return (
     <div>
       <Box
@@ -56,6 +73,9 @@ const Signup = () => {
             variant="outlined"
             sx={{
               mb: 2,
+              color: "#d1d5db",
+              // textDecorationColor: "#d1d5db",
+
               "& .MuiInputLabel-root": { color: "#d1d5db" },
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
@@ -66,6 +86,9 @@ const Signup = () => {
                 },
                 "&.Mui-focused fieldset": {
                   borderColor: "#2575FC",
+                },
+                "& .MuiOutlinedInput-input": {
+                  color: "#d1d5db", // Input text color
                 },
               },
             }}
@@ -88,6 +111,9 @@ const Signup = () => {
                 },
                 "&.Mui-focused fieldset": {
                   borderColor: "#2575FC",
+                },
+                "& .MuiOutlinedInput-input": {
+                  color: "#d1d5db", // Input text color
                 },
               },
             }}
@@ -112,6 +138,9 @@ const Signup = () => {
                 "&.Mui-focused fieldset": {
                   borderColor: "#2575FC",
                 },
+                "& .MuiOutlinedInput-input": {
+                  color: "#d1d5db", // Input text color
+                },
               },
             }}
           />
@@ -135,11 +164,15 @@ const Signup = () => {
                 "&.Mui-focused fieldset": {
                   borderColor: "#2575FC",
                 },
+                "& .MuiOutlinedInput-input": {
+                  color: "#d1d5db", // Input text color
+                },
               },
             }}
           />
           <Button
             fullWidth
+            onClick={() => HandleSignUp()}
             variant="contained"
             sx={{
               py: 1.5,
