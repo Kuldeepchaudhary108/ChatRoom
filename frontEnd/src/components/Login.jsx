@@ -2,20 +2,23 @@ import React, { useState } from "react";
 import { TextField, Button, Typography, Box } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { apiCLient, LOGIN_ROUTE } from "../service/api";
+import { useAppStore } from "../store/store.js";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { setUserInfo, userInfo } = useAppStore();
+
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
   const handleLogin = async () => {
-    console.log("yahan tk kaam ho rhaa hain ");
     const res = await apiCLient.post(LOGIN_ROUTE, { email, password });
     if (res.status === 200) {
       console.log(res.data.user);
       // console.log(res.data.user.user.username);
       const user = res.data.user;
-      // setUserInfo(user);
+      setUserInfo(user);
+      // console.log(userInfo);
 
       navigate(`/chat/${user.username}/${user._id}`);
     }

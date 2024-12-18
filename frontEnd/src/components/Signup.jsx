@@ -25,7 +25,7 @@ const Signup = () => {
     if (response.status === 201) {
       const user = response.data.user;
       setUserInfo(user);
-
+      console.log(userInfo);
       navigate(`/chat/${user.username}/${user._id}`);
     }
   };
