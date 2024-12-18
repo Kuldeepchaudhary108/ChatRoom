@@ -10,7 +10,6 @@ const gernateAccessAndRefreshTokens = async (userId) => {
     // const accessToken =
 
     const accessToken = user.generateAccessToken();
-    ;
     const refreshToken = user.generateRefreshToken();
 
     user.refreshToken = refreshToken;
@@ -114,6 +113,7 @@ const loginUser = asyncHandler(async (req, res) => {
     "-password -refreshToken"
   );
   console.log("user login succefully");
+  console.log(loggedInUser);
   const options = { httpOnly: true, secure: true };
   return res
     .status(200)

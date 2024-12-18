@@ -1,10 +1,25 @@
 import React, { useState } from "react";
 import { TextField, Button, Typography, Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { apiCLient, LOGIN_ROUTE } from "../service/api";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
+  const handleLogin = async () => {
+    console.log("yahan tk kaam ho rhaa hain ");
+    const res = await apiCLient.post(LOGIN_ROUTE, { email, password });
+    if (res.status === 200) {
+      console.log(res.data.user);
+      // console.log(res.data.user.user.username);
+      const user = res.data.user;
+      // setUserInfo(user);
+
+      navigate(`/chat/${user.username}/${user._id}`);
+    }
+  };
   return (
     <div>
       <Box
@@ -99,6 +114,7 @@ const Login = () => {
           <Button
             fullWidth
             variant="contained"
+            onClick={() => handleLogin()}
             sx={{
               py: 1.5,
               background: "linear-gradient(to right, #6A11CB, #2575FC)",
