@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import "./index.css";
 import { Signup, Login, Container } from "./components/index.js";
+import { useAppStore } from "./store/store.js";
 // const router = createBrowserRouter([
 //   {
 //     path: "/",
@@ -31,12 +32,18 @@ import { Signup, Login, Container } from "./components/index.js";
 // ]);
 
 const PrivateRoute = ({ children }) => {
-  const accessToken = sessionStorage.getItem("accessToken");
+  const { userInfo } = useAppStore();
+  const isAuthenticated = !userInfo;
 
-  return accessToken ? children : <Navigate to="/login" />;
+  return isAuthenticated ? children : <Navigate to="/login" />;
 };
 
+const AuthRoute = ({ children }) => {
+  const { userInfo } = useAppStore();
+  const isAuthenticated = !userInfo;
 
+  return isAuthenticated ? <Navigate to="/login" /> : children;
+};
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>

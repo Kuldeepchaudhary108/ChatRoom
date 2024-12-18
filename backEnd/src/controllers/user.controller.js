@@ -10,6 +10,7 @@ const gernateAccessAndRefreshTokens = async (userId) => {
     // const accessToken =
 
     const accessToken = user.generateAccessToken();
+    ;
     const refreshToken = user.generateRefreshToken();
 
     user.refreshToken = refreshToken;
@@ -74,7 +75,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const createdUser = await User.findById(user._id).select(
     "-password -refreshToken"
   );
-  console.log(createdUser);
+  // console.log(createdUser);
 
   if (!createdUser) {
     throw new ApiError(505, "Something went wrong while registering the user");
@@ -90,7 +91,7 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, " username or email is required ");
   }
 
-  const user = User.findOne({
+  const user = await User.findOne({
     $or: [{ email }],
   });
 
@@ -98,7 +99,8 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(404, " User does not exist ");
   }
 
-  const isPasswordCorrect = await user.isPasswordcorrect(password);
+  // const isPasswordCorrect = await user.isPasswordcorrect(password);
+  const isPasswordCorrect = await user.isPasswordCorrect(password);
 
   if (!isPasswordCorrect) {
     throw new ApiError(401, " Password does not match with user ");
@@ -111,11 +113,11 @@ const loginUser = asyncHandler(async (req, res) => {
   const loggedInUser = await User.findById(user._id).select(
     "-password -refreshToken"
   );
-
+  console.log("user login succefully");
   const options = { httpOnly: true, secure: true };
   return res
     .status(200)
-    .cookie("accessToke", accessToken, options)
+    .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
     .json(
       new ApiResponse(
