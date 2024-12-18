@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import EmojiPicker from "emoji-picker-react";
 import Profile from "./Profile";
-import ThemeToggleButton from "./ThemeBttn";
+// import ThemeToggleButton from "./ThemeBttn";
 export default function Chats() {
   const users = [
     { id: 1, message: "Jack duniya ka papa ", time: "4:15" },
@@ -20,7 +20,6 @@ export default function Chats() {
     setEmoji(false);
   };
 
-  // using chatgpt
   return (
     <div className=" text-white   h-full p-2">
       <header className="flex items-center  justify-between mb-4   border-b-[1px]">
@@ -99,9 +98,6 @@ export default function Chats() {
           </div>
         </div>
       )}
-      <div className="absolute top-0 left-0">
-        <ThemeToggleButton />
-      </div>
     </div>
   );
 }
