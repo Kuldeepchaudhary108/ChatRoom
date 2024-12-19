@@ -35,7 +35,8 @@ export default function List() {
     try {
       const res = await apiCLient.post(LOGOUT_ROUTE);
       if (res.status === 200) {
-        console.log("logout Successfully"), navigate("/login");
+        console.log("logout Successfully");
+        navigate("/login");
       }
     } catch (error) {
       console.log(error);

@@ -20,14 +20,10 @@ const Login = () => {
       if (res.status === 200) {
         console.log(res.data.user);
 
-        // console.log(res.data.user.user.username);
         const user = res.data.user;
-        console.log(user.username);
-        console.log(user._id);
-        setUserInfo(user);
-        console.log(userInfo);
 
-        // navigate(`/chat/${user.username}/${user._id}`);
+        setUserInfo(user);
+
         navigate(`/chat/${user.username}/${user._id}`);
       }
     } catch (error) {
