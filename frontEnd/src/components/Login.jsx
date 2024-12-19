@@ -11,16 +11,25 @@ const Login = () => {
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
-  const handleLogin = async () => {
-    const res = await apiCLient.post(LOGIN_ROUTE, { email, password });
-    if (res.status === 200) {
-      console.log(res.data.user);
-      // console.log(res.data.user.user.username);
-      const user = res.data.user;
-      setUserInfo(user);
-      // console.log(userInfo);
 
-      navigate(`/chat/${user.username}/${user._id}`);
+  const handleLogin = async () => {
+    try {
+      const res = await apiCLient.post(LOGIN_ROUTE, { email, password });
+      if (res.status === 200) {
+        console.log(res.data.user);
+
+        // console.log(res.data.user.user.username);
+        const user = res.data.user;
+        console.log(user.username);
+        console.log(user._id);
+        setUserInfo(user);
+        console.log(userInfo);
+
+        // navigate(`/chat/${user.username}/${user._id}`);
+        navigate(`/chat/${user.username}/${user._id}`);
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
     }
   };
   return (

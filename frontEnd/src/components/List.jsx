@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { apiCLient, LOGOUT_ROUTE } from "../service/api";
 import { useAppStore } from "../store/store.js";
 
+import { Link, useNavigate } from "react-router-dom";
+
 export default function List() {
   const users = [
     {
@@ -23,7 +25,7 @@ export default function List() {
       Dp: "/elements/jack.png",
     },
   ];
-
+  const navigate = useNavigate();
   const { setUserInfo, userInfo } = useAppStore();
 
   const [addMore, setAddMore] = useState(false);
@@ -31,11 +33,9 @@ export default function List() {
 
   const handleLogout = async () => {
     console.log("User logged out");
-    const userId = userInfo._id;
-    const res = await apiCLient.post(LOGOUT_ROUTE, { userId });
-    if (res.status === 200) {
-      console.log("logout successfully");
-    }
+    // const userId = userInfo._id;
+    console.log("logout successfully");
+    navigate("/login");
   };
 
   return (

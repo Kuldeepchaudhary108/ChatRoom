@@ -10,6 +10,7 @@ import {
 import "./index.css";
 import { Signup, Login, Container } from "./components/index.js";
 import { useAppStore } from "./store/store.js";
+import { getCookie } from "./utils/GetCookie.js";
 // const router = createBrowserRouter([
 //   {
 //     path: "/",
@@ -32,15 +33,16 @@ import { useAppStore } from "./store/store.js";
 // ]);
 
 const PrivateRoute = ({ children }) => {
-  const { userInfo } = useAppStore();
-  const isAuthenticated = !userInfo;
+  const accessToken = getCookie("accessToken"); // Check for the access token in cookies
+  console.log(accessToken);
+  // const isAuthenticated = !!userInfo;
 
-  return isAuthenticated ? children : <Navigate to="/login" />;
+  return accessToken ? children : <Navigate to="/login" />;
 };
 
 const AuthRoute = ({ children }) => {
   const { userInfo } = useAppStore();
-  const isAuthenticated = !userInfo;
+  const isAuthenticated = !!userInfo;
 
   return isAuthenticated ? <Navigate to="/login" /> : children;
 };
