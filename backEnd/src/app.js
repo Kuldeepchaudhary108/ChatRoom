@@ -6,7 +6,8 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "http://localhost:5173", // Allow requests from your frontend origin
+    credentials: true,
   })
 );
 app.use(express.json({ limit: "20kb" }));

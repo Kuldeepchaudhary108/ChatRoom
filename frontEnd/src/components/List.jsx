@@ -32,10 +32,14 @@ export default function List() {
   const [showLogout, setShowLogout] = useState(false);
 
   const handleLogout = async () => {
-    console.log("User logged out");
-    // const userId = userInfo._id;
-    console.log("logout successfully");
-    navigate("/login");
+    try {
+      const res = await apiCLient.post(LOGOUT_ROUTE);
+      if (res.status === 200) {
+        console.log("logout Successfully"), navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

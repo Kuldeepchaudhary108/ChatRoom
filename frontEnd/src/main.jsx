@@ -34,7 +34,7 @@ import { getCookie } from "./utils/GetCookie.js";
 
 const PrivateRoute = ({ children }) => {
   const accessToken = getCookie("accessToken"); // Check for the access token in cookies
-  console.log(accessToken);
+  // console.log(accessToken);
   // const isAuthenticated = !!userInfo;
 
   return accessToken ? children : <Navigate to="/login" />;

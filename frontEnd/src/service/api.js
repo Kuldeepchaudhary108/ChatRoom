@@ -8,4 +8,5 @@ export const LOGOUT_ROUTE = `${AUTH_ROUTE}/logout`;
 
 export const apiCLient = axios.create({
   baseURL: Host,
+  withCredentials: true,
 });

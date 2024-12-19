@@ -14,6 +14,8 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
+      console.log("its working");
+
       const res = await apiCLient.post(LOGIN_ROUTE, { email, password });
       if (res.status === 200) {
         console.log(res.data.user);
