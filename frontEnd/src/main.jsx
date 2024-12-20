@@ -33,24 +33,40 @@ import { getCookie } from "./utils/GetCookie.js";
 // ]);
 
 const PrivateRoute = ({ children }) => {
-  const accessToken = getCookie("accessToken"); // Check for the access token in cookies
-  // console.log(accessToken);
-  // const isAuthenticated = !!userInfo;
+  const isAuthenticated = getCookie("accessToken");
 
-  return accessToken ? children : <Navigate to="/login" />;
+  return isAuthenticated ? children : <Navigate to="/login" />;
 };
 
 const AuthRoute = ({ children }) => {
+  const isAuthenticated = getCookie("accessToken");
   const { userInfo } = useAppStore();
-  const isAuthenticated = !!userInfo;
-
-  return isAuthenticated ? <Navigate to="/login" /> : children;
+  // console.log(userInfo);
+  return isAuthenticated ? (
+    <Navigate to={`/chat/${userInfo.username}/${userInfo._id}`} />
+  ) : (
+    children
+  );
 };
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/login" element={<Login />} />
+      <Route
+        path="/signup"
+        element={
+          <AuthRoute>
+            <Signup />
+          </AuthRoute>
+        }
+      />
+      <Route
+        path="/login"
+        element={
+          <AuthRoute>
+            <Login />
+          </AuthRoute>
+        }
+      />
       <Route
         path="/chat/:user/:id"
         element={

@@ -18,12 +18,11 @@ const Login = () => {
 
       const res = await apiCLient.post(LOGIN_ROUTE, { email, password });
       if (res.status === 200) {
-        console.log(res.data.user);
+        // console.log(res.data.user);
 
         const user = res.data.user;
 
         setUserInfo(user);
-
         navigate(`/chat/${user.username}/${user._id}`);
       }
     } catch (error) {
