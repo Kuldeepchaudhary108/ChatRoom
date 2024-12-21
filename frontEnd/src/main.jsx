@@ -42,11 +42,7 @@ const AuthRoute = ({ children }) => {
   const isAuthenticated = getCookie("accessToken");
   const { userInfo } = useAppStore();
   // console.log(userInfo);
-  return isAuthenticated ? (
-    <Navigate to={`/chat/${userInfo.username}/${userInfo._id}`} />
-  ) : (
-    children
-  );
+  return isAuthenticated ? <Login /> : children;
 };
 const router = createBrowserRouter(
   createRoutesFromElements(
