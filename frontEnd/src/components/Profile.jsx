@@ -1,115 +1,135 @@
-import { Avatar, Input } from "@mui/material";
+import { Avatar } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useStore } from "zustand";
+// import { useAppStore } from "zustand";
+import { useAppStore } from "../store/store";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { colors, GetColor } from "../utils/GetColor";
+import { apiCLient, UPDATE_ROUTE } from "../service/api";
 
 export default function Profile() {
   const navigate = useNavigate();
-  const { userInfo, setUserInfo } = useStore;
-  const [color, setColor] = useState(0);
+  const { userInfo, setUserInfo } = useAppStore();
+  const [color1, setColors] = useState(0);
   const [image, setImage] = useState(null);
   const [firstName, setFirstName] = useState("");
   const [surName, setSurName] = useState("");
   const [hovered, setHovered] = useState(false);
-  const saveChange = async () => {};
+
+  const saveChange = async () => {
+    console.log("zustand userdata", userInfo);
+
+    try {
+      console.log(color1);
+      const res = await apiCLient.patch(UPDATE_ROUTE, {
+        firstName,
+        surName,
+        color1,
+      });
+      if (res.status === 200) {
+        console.log("Update account details succefully ");
+        // console.log("user data after update ", res.data);
+        console.log("user data after update ", res.data._doc);
+        setUserInfo(res.data);
+        navigate("/chat");
+      }
+    } catch (error) {
+      console.log("error while updating to account details :", error);
+    }
+  };
+
   return (
-    <div className="bg-[#1b1c24] h-[100vh] flex items-center justify-center flex-col gap-10">
-      <div className="flex flex-col gap-10 w-[80vw] md:w-max">
-        {/* <div className="">{back}</div> */}
-        <div className="grid grid-cols-2">
+    <div className="bg-gray-900/80 min-h-screen flex items-center justify-center p-6">
+      <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-3xl">
+        <h2 className="text-2xl font-semibold text-white text-center mb-8">
+          Profile Settings
+        </h2>
+        <div className="flex flex-wrap justify-between items-center gap-8">
+          {/* Avatar Section */}
           <div
-            className="h-full w-32 md:h-48 relative flex items-center justify-center"
+            className="relative group h-32 w-32 md:h-48 md:w-48 flex items-center justify-center"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >
-            <Avatar className="h-32 w-32 md:w-48 rounded-full overflow-hidden">
+            <Avatar className="h-full w-full rounded-full overflow-hidden">
               {image ? (
                 <Avatar
                   src={image}
-                  alt="profile"
+                  alt="Profile"
                   className="object-cover w-full h-full"
                 />
               ) : (
                 <div
-                  className={`uppercase h-32 w-32 md:w-48 text-5xl border-[1px] flex items-center justify-center rounded-full ${GetColor(
-                    color
-                  )} `}
+                  className={`uppercase flex items-center justify-center text-xl md:text-3xl font-bold ${GetColor(
+                    color1
+                  )} h-full w-full rounded-full`}
                 >
-                  {
-                    firstName ? firstName.split("").shift() : null
-                    // : userInfo.email.split("").shift()
-                  }
+                  {firstName ? firstName.charAt(0) : ""}
                 </div>
               )}
             </Avatar>
             {hovered && (
-              <div className="absolute insert-0 flex items-ceter justify-center bg-black/50 ring-fuchsia-50">
+              <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                 {image ? (
-                  <FaTrash className="text-white text-3xl cursor-pointer" />
+                  <FaTrash
+                    className="text-white text-3xl cursor-pointer"
+                    onClick={() => setImage(null)}
+                  />
                 ) : (
-                  <FaPlus className="text-white text-3xl cursor-pointer" />
+                  <FaPlus
+                    className="text-white text-3xl cursor-pointer"
+                    onClick={() => console.log("Add image logic")}
+                  />
                 )}
               </div>
             )}
           </div>
-          {/* {input section} */}
-          <div className="flex min-w-32 md:min-w-64 flex-col gap-5 text-white items-center justify-center">
-            <div className="w-full">
-              <input
-                type="email"
-                placeholder="email"
-                disabled
-                value={userInfo}
-                className="rounded-lg p-6 bg-[#2c2e3b] border-none"
-              />
-            </div>
-            <div className="w-full">
-              <input
-                type="text"
-                placeholder="First Name"
-                onChange={(e) => setFirstName(e.target.value)}
-                value={firstName}
-                className="rounded-lg p-6 bg-[#2c2e3b] border-none"
-              />
-            </div>
-            <div className="w-full">
-              <input
-                type="text"
-                placeholder="Last Name "
-                onChange={(e) => setSurName(e.target.value)}
-                value={surName}
-                className="rounded-lg p-6 bg-[#2c2e3b] border-none"
-              />
-            </div>
-            <div className="w-full flex gap-5">
-              {colors.map((color, index) => (
+
+          {/* Form Section */}
+          <div className="flex-1 text-white space-y-6">
+            <input
+              type="email"
+              value={userInfo.email || ""}
+              disabled
+              placeholder="Email"
+              className="w-full p-4 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+            <input
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="First Name"
+              className="w-full p-4 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+            <input
+              type="text"
+              value={surName}
+              onChange={(e) => setSurName(e.target.value)}
+              placeholder="Last Name"
+              className="w-full p-4 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+            <div className="flex items-center gap-4">
+              {colors.map((colorClass, index) => (
                 <div
-                  className={`${color} h-8 w-8 rounded-full cursor-pointer transition-all duration-300
-                    ${
-                      setColor === index
-                        ? "outline outline-white/50 outline-1"
-                        : ""
-                    }
-                    `}
                   key={index}
-                  onClick={() => setColor(index)}
+                  className={`${colorClass} h-8 w-8 rounded-full cursor-pointer ${
+                    color1 === index ? "ring-2 ring-white" : ""
+                  }`}
+                  onClick={() => setColors(index)}
                 ></div>
               ))}
             </div>
           </div>
         </div>
-        <div className="w-full">
-          <button
-            onClick={() => saveChange()}
-            className="h-16 w-full bg-purple-700 hover:bg-purple-900 transition-all duration-300"
-          >
-            Save Change
-          </button>
-        </div>
+
+        {/* Save Button */}
+        <button
+          onClick={saveChange}
+          className="mt-6 w-full py-4 bg-purple-600 hover:bg-purple-800 rounded-lg text-white text-lg font-medium transition-all"
+        >
+          Save Changes
+        </button>
       </div>
-      Profile
     </div>
   );
 }

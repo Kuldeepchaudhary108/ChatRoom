@@ -33,11 +33,9 @@ const registerUser = asyncHandler(async (req, res) => {
   //remove passwor and refresh token feild from respones
   //check the user creation
   //return user
-  const { UserName, email, FullName, password, about } = req.body;
+  const { UserName, email, password, about } = req.body;
 
-  if (
-    [UserName, email, FullName, password].some((field) => field.trim() === "")
-  ) {
+  if ([UserName, email, password].some((field) => field.trim() === "")) {
     throw new ApiError(400, "All fields are required");
   }
   const existUser = await User.findOne({
@@ -64,7 +62,7 @@ const registerUser = asyncHandler(async (req, res) => {
   // console.log(avatar);
 
   const user = await User.create({
-    fullName: FullName,
+    // fullName: FullName,
     email,
     username: UserName,
     password,
@@ -178,9 +176,10 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 });
 
 const updateAccountDetails = asyncHandler(async (req, res) => {
-  const { fullName, email, about } = req.body;
+  const { email } = req.body;
+  const { firstName, surName, color } = req.body;
 
-  if (!fullName || !email) {
+  if (!firstName || !surName || !color) {
     throw new ApiError(400, "All fields are required");
   }
 
@@ -188,9 +187,9 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
     req.user?._id,
     {
       $set: {
-        fullName,
-        email,
-        about,
+        firstName,
+        surName,
+        color,
       },
     },
     { new: true }

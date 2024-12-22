@@ -14,16 +14,15 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      console.log("its working");
-
       const res = await apiCLient.post(LOGIN_ROUTE, { email, password });
-      if (res.status === 201) {
+      if (res.status === 200) {
         // console.log(res.data.user);
 
-        navigate("/profile");
         const user = res.data.user;
-
+        // console.log(user);
         setUserInfo(user);
+        console.log("Navigating to profile...");
+        navigate("/profile");
       }
     } catch (error) {
       console.error("Login failed:", error);

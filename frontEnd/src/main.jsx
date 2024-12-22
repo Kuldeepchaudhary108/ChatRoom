@@ -41,7 +41,7 @@ const AuthRoute = ({ children }) => {
   const isAuthenticated = getCookie("accessToken");
   const { userInfo } = useAppStore();
   // console.log(userInfo);
-  return isAuthenticated ? <Navigate to="/chat" replace /> : children;
+  return isAuthenticated ? <Navigate to="/profile" replace /> : children;
 };
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -49,17 +49,17 @@ const router = createBrowserRouter(
       <Route
         path="/signup"
         element={
-          <AuthRoute>
+          <>
             <Signup />
-          </AuthRoute>
+          </>
         }
       />
       <Route
         path="/login"
         element={
-          <AuthRoute>
+          <>
             <Login />
-          </AuthRoute>
+          </>
         }
       />
       <Route
