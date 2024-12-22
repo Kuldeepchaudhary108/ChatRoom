@@ -23,7 +23,7 @@ const Login = () => {
         const user = res.data.user;
 
         setUserInfo(user);
-        navigate(`/chat/${user.username}/${user._id}`);
+        navigate(`/chat`);
       }
     } catch (error) {
       console.error("Login failed:", error);

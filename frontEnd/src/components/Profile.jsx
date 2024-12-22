@@ -8,7 +8,7 @@ export default function Profile() {
 
   return (
     <div className=" flex h-96 rounded-md ">
-      <div className="profile space-y-3 w-[20%] backdrop-blur ">
+      <div className="profile space-y-1 w-[20%] backdrop-blur ">
         {["Overview", "Media", "Files", "links", "Groups"].map(
           (value, index) => (
             <button

@@ -9,8 +9,10 @@ export default function Container() {
         <div className="list  flex-[3] border-r-[1px] border-white">
           <List />
         </div>
-        <div className="chat flex-[7]">
-          <Chats />
+        <div className="chat flex-[7]">{/* <Chats /> */}
+          {
+            
+          }
         </div>
       </div>
     </>

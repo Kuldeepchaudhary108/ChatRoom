@@ -34,15 +34,14 @@ import { getCookie } from "./utils/GetCookie.js";
 
 const PrivateRoute = ({ children }) => {
   const isAuthenticated = getCookie("accessToken");
-
-  return isAuthenticated ? children : <Navigate to="/login" />;
+  return isAuthenticated ? children : <Navigate to="/login" replace />;
 };
 
 const AuthRoute = ({ children }) => {
   const isAuthenticated = getCookie("accessToken");
   const { userInfo } = useAppStore();
   // console.log(userInfo);
-  return isAuthenticated ? <Login /> : children;
+  return isAuthenticated ? <Navigate to="/chat" replace /> : children;
 };
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -52,7 +51,7 @@ const router = createBrowserRouter(
         element={
           <AuthRoute>
             <Signup />
-          </AuthRoute>
+          </AuthRoute>  
         }
       />
       <Route
@@ -64,7 +63,7 @@ const router = createBrowserRouter(
         }
       />
       <Route
-        path="/chat/:user/:id"
+        path="/chat"
         element={
           <PrivateRoute>
             <Container />

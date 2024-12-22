@@ -15,18 +15,22 @@ const Signup = () => {
   const [FullName, setFullName] = useState("");
 
   const HandleSignUp = async () => {
-    const response = await apiCLient.post(SIGNUP_ROUTE, {
-      email,
-      password,
-      UserName,
-      FullName,
-    });
+    try {
+      const response = await apiCLient.post(SIGNUP_ROUTE, {
+        email,
+        password,
+        UserName,
+        FullName,
+      });
 
-    if (response.status === 201) {
-      const user = response.data.user;
-      setUserInfo(user);
-      console.log(userInfo);
-      navigate(`/chat/${user.username}/${user._id}`);
+      if (response.status === 201) {
+        const user = response.data.user;
+        setUserInfo(user);
+        console.log(userInfo);
+        navigate(`/chat`);
+      }
+    } catch (error) {
+      console.log("error while signup:", error);
     }
   };
   return (
