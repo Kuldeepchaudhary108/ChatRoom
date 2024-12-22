@@ -1,132 +1,115 @@
+import { Avatar, Input } from "@mui/material";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useStore } from "zustand";
+import { FaPlus, FaTrash } from "react-icons/fa";
+import { colors, GetColor } from "../utils/GetColor";
 
 export default function Profile() {
-  const [selection, setSelection] = useState("Overview");
-  const handleClick = (value) => {
-    setSelection(value);
-  };
-
+  const navigate = useNavigate();
+  const { userInfo, setUserInfo } = useStore;
+  const [color, setColor] = useState(0);
+  const [image, setImage] = useState(null);
+  const [firstName, setFirstName] = useState("");
+  const [surName, setSurName] = useState("");
+  const [hovered, setHovered] = useState(false);
+  const saveChange = async () => {};
   return (
-    <div className=" flex h-96 rounded-md ">
-      <div className="profile space-y-1 w-[20%] backdrop-blur ">
-        {["Overview", "Media", "Files", "links", "Groups"].map(
-          (value, index) => (
-            <button
-              className={`${
-                value === selection ? "bg-gray-700" : ""
-              } hover:bg-gray-600 p-2 rounded-lg`}
-              key={index}
-              onClick={() => handleClick(value)}
-            >
-              {value}
-            </button>
-          )
-        )}
-      </div>
-      {/* content*/}
-      <div className=" ">
-        {/* Overview Section */}
-        {selection === "Overview" && (
-          <div className="bg-gray-800 rounded-lg p-6 shadow-lg">
-            <div className="flex items-center space-x-4">
-              <img
-                className="rounded-full w-20 h-20"
-                src="/elements/jack.png"
-                alt="Profile Picture"
+    <div className="bg-[#1b1c24] h-[100vh] flex items-center justify-center flex-col gap-10">
+      <div className="flex flex-col gap-10 w-[80vw] md:w-max">
+        {/* <div className="">{back}</div> */}
+        <div className="grid grid-cols-2">
+          <div
+            className="h-full w-32 md:h-48 relative flex items-center justify-center"
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+          >
+            <Avatar className="h-32 w-32 md:w-48 rounded-full overflow-hidden">
+              {image ? (
+                <Avatar
+                  src={image}
+                  alt="profile"
+                  className="object-cover w-full h-full"
+                />
+              ) : (
+                <div
+                  className={`uppercase h-32 w-32 md:w-48 text-5xl border-[1px] flex items-center justify-center rounded-full ${GetColor(
+                    color
+                  )} `}
+                >
+                  {
+                    firstName ? firstName.split("").shift() : null
+                    // : userInfo.email.split("").shift()
+                  }
+                </div>
+              )}
+            </Avatar>
+            {hovered && (
+              <div className="absolute insert-0 flex items-ceter justify-center bg-black/50 ring-fuchsia-50">
+                {image ? (
+                  <FaTrash className="text-white text-3xl cursor-pointer" />
+                ) : (
+                  <FaPlus className="text-white text-3xl cursor-pointer" />
+                )}
+              </div>
+            )}
+          </div>
+          {/* {input section} */}
+          <div className="flex min-w-32 md:min-w-64 flex-col gap-5 text-white items-center justify-center">
+            <div className="w-full">
+              <input
+                type="email"
+                placeholder="email"
+                disabled
+                value={userInfo}
+                className="rounded-lg p-6 bg-[#2c2e3b] border-none"
               />
-              <div>
-                <h3 className="text-2xl font-semibold">Jack</h3>
-                <p className="text-gray-400">Jack Singh</p>
-              </div>
             </div>
-
-            <div className="flex space-x-4 mt-4">
-              <button className="bg-gray-700 p-3 rounded-md flex items-center space-x-2 hover:bg-gray-600">
-                <img
-                  className="w-5"
-                  src="/elements/video.png"
-                  alt="Video Call"
-                />
-                <span>Video</span>
-              </button>
-              <button className="bg-gray-700 p-3 rounded-md flex items-center space-x-2 hover:bg-gray-600">
-                <img
-                  className="w-5"
-                  src="/elements/phone.png"
-                  alt="Voice Call"
-                />
-                <span>Voice</span>
-              </button>
+            <div className="w-full">
+              <input
+                type="text"
+                placeholder="First Name"
+                onChange={(e) => setFirstName(e.target.value)}
+                value={firstName}
+                className="rounded-lg p-6 bg-[#2c2e3b] border-none"
+              />
             </div>
-
-            <div className="mt-6 space-y-4">
-              <div>
-                <h6 className="font-semibold">About</h6>
-                <p className="text-gray-400">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Itaque, fugit.
-                </p>
-              </div>
-              <div>
-                <h6 className="font-semibold">Phone Number</h6>
-                <p className="text-gray-400">+91 XXXXXXXXXX</p>
-              </div>
-              <div>
-                <h6 className="font-semibold">Disappearing Message</h6>
-                <p className="text-gray-400">Off</p>
-              </div>
-              <div>
-                <h6 className="font-semibold">Mute Notifications</h6>
-                <button className="bg-gray-700 px-4 py-2 rounded-md hover:bg-gray-600">
-                  Muted
-                </button>
-              </div>
+            <div className="w-full">
+              <input
+                type="text"
+                placeholder="Last Name "
+                onChange={(e) => setSurName(e.target.value)}
+                value={surName}
+                className="rounded-lg p-6 bg-[#2c2e3b] border-none"
+              />
             </div>
-
-            <div className="mt-6 border-t border-gray-700 pt-4 flex space-x-4">
-              <button className="bg-red-600 px-4 py-2 rounded-md hover:bg-red-500">
-                Block
-              </button>
-              <button className="bg-yellow-500 px-4 py-2 rounded-md hover:bg-yellow-400">
-                Report
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Media Section */}
-        {selection === "Media" && (
-          <div className="grid grid-cols-3 gap-4 overflow-y-auto max-h-[500px] p-4 bg-gray-800 rounded-lg shadow-lg">
-            {Array(12)
-              .fill(0)
-              .map((_, index) => (
-                <img
+            <div className="w-full flex gap-5">
+              {colors.map((color, index) => (
+                <div
+                  className={`${color} h-8 w-8 rounded-full cursor-pointer transition-all duration-300
+                    ${
+                      setColor === index
+                        ? "outline outline-white/50 outline-1"
+                        : ""
+                    }
+                    `}
                   key={index}
-                  src="/elements/jack.png"
-                  alt={`Media ${index + 1}`}
-                  className="rounded-lg shadow-md hover:scale-105 transition"
-                />
+                  onClick={() => setColor(index)}
+                ></div>
               ))}
+            </div>
           </div>
-        )}
-
-        {/* Additional Sections */}
-        {selection === "Files" && (
-          <div className=" bg-gray-800 w-[400px] rounded-lg p-6 shadow-lg flex items-center justify-center h-full text-gray-400">
-            <p>{selection} content is coming soon...</p>
-          </div>
-        )}
-        {selection === "links" && (
-          <div className=" bg-gray-800 w-[400px] rounded-lg p-6 shadow-lg flex items-center justify-center h-full text-gray-400">
-            <p>{selection} content is coming soon...</p>
-          </div>
-        )}
-        {selection === "Groups" && (
-          <div className=" bg-gray-800 w-[400px] rounded-lg p-6 shadow-lg flex items-center justify-center h-full text-gray-400">
-            <p>{selection} content is coming soon...</p>
-          </div>
-        )}
+        </div>
+        <div className="w-full">
+          <button
+            onClick={() => saveChange()}
+            className="h-16 w-full bg-purple-700 hover:bg-purple-900 transition-all duration-300"
+          >
+            Save Change
+          </button>
+        </div>
       </div>
+      Profile
     </div>
   );
 }

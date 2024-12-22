@@ -22,12 +22,12 @@ const Signup = () => {
         UserName,
         FullName,
       });
+      console.log(response.status);
 
       if (response.status === 201) {
         const user = response.data.user;
         setUserInfo(user);
         console.log(userInfo);
-        navigate(`/chat`);
       }
     } catch (error) {
       console.log("error while signup:", error);

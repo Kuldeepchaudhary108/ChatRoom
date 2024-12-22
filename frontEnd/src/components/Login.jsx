@@ -17,13 +17,13 @@ const Login = () => {
       console.log("its working");
 
       const res = await apiCLient.post(LOGIN_ROUTE, { email, password });
-      if (res.status === 200) {
+      if (res.status === 201) {
         // console.log(res.data.user);
 
+        navigate("/profile");
         const user = res.data.user;
 
         setUserInfo(user);
-        navigate(`/chat`);
       }
     } catch (error) {
       console.error("Login failed:", error);

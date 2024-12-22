@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EmojiPicker from "emoji-picker-react";
-import Profile from "./Profile";
+import OverView from "./OverView";
 // import ThemeToggleButton from "./ThemeBttn";
 export default function Chats() {
   const users = [
@@ -94,7 +94,7 @@ export default function Chats() {
       {viewProfile && (
         <div className="">
           <div className=" top-0  absolute">
-            <Profile />
+            <OverView />
           </div>
         </div>
       )}

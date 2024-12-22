@@ -8,7 +8,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import "./index.css";
-import { Signup, Login, Container } from "./components/index.js";
+import { Signup, Login, Container, Profile } from "./components/index.js";
 import { useAppStore } from "./store/store.js";
 import { getCookie } from "./utils/GetCookie.js";
 // const router = createBrowserRouter([
@@ -51,7 +51,7 @@ const router = createBrowserRouter(
         element={
           <AuthRoute>
             <Signup />
-          </AuthRoute>  
+          </AuthRoute>
         }
       />
       <Route
@@ -67,6 +67,14 @@ const router = createBrowserRouter(
         element={
           <PrivateRoute>
             <Container />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <PrivateRoute>
+            <Profile />
           </PrivateRoute>
         }
       />
