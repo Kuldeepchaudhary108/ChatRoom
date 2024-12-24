@@ -21,13 +21,13 @@ const UserSchema = new Schema(
 
     firstName: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
       index: true,
     },
     surName: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
       index: true,
     },
@@ -39,7 +39,7 @@ const UserSchema = new Schema(
       type: Number,
       required: false,
     },
-    profileSetup: {
+    profileSetup: { 
       type: Boolean,
       default: false,
     },

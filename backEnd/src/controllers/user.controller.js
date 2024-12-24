@@ -33,8 +33,9 @@ const registerUser = asyncHandler(async (req, res) => {
   //remove passwor and refresh token feild from respones
   //check the user creation
   //return user
-  const { UserName, email, password, about } = req.body;
 
+  const { UserName, email, password, about } = req.body;
+  
   if ([UserName, email, password].some((field) => field.trim() === "")) {
     throw new ApiError(400, "All fields are required");
   }
@@ -73,7 +74,7 @@ const registerUser = asyncHandler(async (req, res) => {
     "-password -refreshToken"
   );
   // console.log(createdUser);
-
+  // https://www.youtube.com/watch?v=ntKkVrQqBYY
   if (!createdUser) {
     throw new ApiError(505, "Something went wrong while registering the user");
   }

@@ -17,7 +17,7 @@ export default function Profile() {
   const [hovered, setHovered] = useState(false);
 
   const saveChange = async () => {
-    console.log("zustand userdata", userInfo);
+    // console.log("zustand userdata", userInfo);
 
     try {
       console.log(color1);
@@ -87,13 +87,13 @@ export default function Profile() {
 
           {/* Form Section */}
           <div className="flex-1 text-white space-y-6">
-            <input
+            {/* <input
               type="email"
               value={userInfo.email || ""}
               disabled
               placeholder="Email"
               className="w-full p-4 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-            />
+            /> */}
             <input
               type="text"
               value={firstName}

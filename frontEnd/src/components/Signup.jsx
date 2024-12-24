@@ -20,14 +20,18 @@ const Signup = () => {
         email,
         password,
         UserName,
-        FullName,
+        // FullName,
       });
       console.log(response.status);
+      navigate("/profile");
 
       if (response.status === 201) {
         const user = response.data.user;
+        console.log("data from backend", user);
         setUserInfo(user);
-        console.log(userInfo);
+        // console.log(userInfo);
+        console.log("Navigating to profile...");
+        console.log("dekhte hain ");
       }
     } catch (error) {
       console.log("error while signup:", error);
@@ -100,7 +104,7 @@ const Signup = () => {
               },
             }}
           />
-          <TextField
+          {/* <TextField
             fullWidth
             label="Fullname"
             value={FullName}
@@ -124,7 +128,7 @@ const Signup = () => {
                 },
               },
             }}
-          />
+          /> */}
           <TextField
             fullWidth
             label="Email"
